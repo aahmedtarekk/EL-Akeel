@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import java.util.List;
 
@@ -23,8 +24,14 @@ public class Restaurant {
 	
 	private int ownerId;
 	
+	@OneToOne(mappedBy="restaurant")
+	private RestaurantOwner restaurantOwner;
+	
 	@OneToMany(mappedBy="restaurant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Meal> menu;
+	
+	@OneToMany(mappedBy="restaurant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<CustomerOrders> orders;
 	
 	public int getId() {
 		return id;
@@ -49,5 +56,17 @@ public class Restaurant {
 	}
 	public void setMenu(List<Meal> menu) {
 		this.menu = menu;
+	}
+	public List<CustomerOrders> getOrders() {
+		return orders;
+	}
+	public void setOrders(List<CustomerOrders> orders) {
+		this.orders = orders;
+	}
+	public RestaurantOwner getRestaurantOwner() {
+		return restaurantOwner;
+	}
+	public void setRestaurantOwner(RestaurantOwner restaurantOwner) {
+		this.restaurantOwner = restaurantOwner;
 	}
 }

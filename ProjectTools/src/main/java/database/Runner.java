@@ -1,30 +1,22 @@
-package com.lab.task.model;
+package database;
 
 import javax.ejb.Stateful;
-import javax.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
+@Entity
 @Stateful
-public class Runner {
+public class Runner extends User{
 	
-	@Id
-	private int id;
-
-	private String name;
+	@OneToOne
+	@JoinColumn(name="customerorders_id")
+	private CustomerOrders customerOrders;
+	
 	private boolean status;
 	private double delivery_fees;
-		
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+
 	public boolean isStatus() {
 		return status;
 	}
@@ -36,6 +28,12 @@ public class Runner {
 	}
 	public void setDelivery_fees(double delivery_fees) {
 		this.delivery_fees = delivery_fees;
+	}
+	public CustomerOrders getCustomerOrders() {
+		return customerOrders;
+	}
+	public void setCustomerOrders(CustomerOrders customerOrders) {
+		this.customerOrders = customerOrders;
 	}
 
 	
